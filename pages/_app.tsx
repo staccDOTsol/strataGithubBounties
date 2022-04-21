@@ -1,3 +1,4 @@
+import { useWallet } from "@solana/wallet-adapter-react";
 import { AppProps } from "next/app";
 import { FC } from "react";
 import "../components/bufferFill";
@@ -9,6 +10,7 @@ require("@solana/wallet-adapter-react-ui/styles.css");
 require("../styles/globals.css");
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
+  const wallie = useWallet()
   return (
     <Providers>
       <Header />
