@@ -1,18 +1,38 @@
 {
-  "name": "@strata-foundation/marketplace-ui",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "name": "@strata-foundation/strata",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "description": "Wum.bo Token Staking tests",
+  "license": "MIT",
+  "author": "Wum.bo Inc.",
+  "devDependencies": {
+    "@parcel/packager-ts": "^2.0.0",
+    "@parcel/transformer-typescript-types": "^2.0.0",
+    "@project-serum/anchor": "^0.22.0",
+    "@types/chai": "^4.2.21",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "camelcase": "^6.2.0",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "concurrently": "^6.2.1",
+    "mocha": "^8.1.0",
+    "prettier": "2.3.1",
+    "ts-mocha": "^8.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.3",    "@types/gtag.js": "^0.0.10",
+    "@types/node": "17.0.8",
+    "@types/react": "^17.0.38",
+    "eslint": "^8.6.0",
+    "eslint-config-next": "^12.0.7",
+    "shx": "^0.3.3"
+
   },
-  "source": "src/index.ts",
-  "version": "3.5.5",
-  "license": "Apache-2.0",
-  "exports": {
-    ".": "./dist/lib/index.js"
-  },
-  "main": "dist/lib/index.js",
-  "types": "dist/lib/index.d.ts",
   "scripts": {
+  
     "clean": "shx rm -rf .next",
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "watch": "tsc --watch --project tsconfig-build.json",
@@ -20,22 +40,25 @@
     "build": "yarn clean && next build && tsc --project tsconfig-build.json",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "precommit": "git-format-staged -f 'prettier --ignore-unknown --stdin --stdin-filepath \"{}\"' ."
+    "format": "prettier --write \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.1.7",
+    "@bonfida/spl-name-service": "^0.1.22",
+    "@solana/buffer-layout": "^3.0.0",
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^1.32.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0",
+    "quicktype-core": "^6.0.70",    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.1",
     "@civic/solana-gateway-react": "^0.4.14-beta.1",
     "@hookform/resolvers": "^2.8.8",
     "@metaplex-foundation/mpl-token-metadata": "^1.1.0",
     "@sevenoutman/use-debounced-memo": "^1.0.0",
     "@solana/spl-governance": "^0.0.26",
-    "@solana/spl-token": "^0.1.8",
     "@solana/wallet-adapter-react": "^0.15.2",
     "@solana/wallet-adapter-react-ui": "^0.9.1",
     "@solana/wallet-adapter-wallets": "^0.14.3",
-    "@solana/web3.js": "^1.32.0",
     "@strata-foundation/marketplace-sdk": "^3.5.5",
     "@strata-foundation/react": "^3.5.5",
     "@strata-foundation/web3-token-auth": "^3.5.4",
@@ -63,15 +86,6 @@
     "react-hot-toast": "^2.2.0",
     "recharts": "^2.1.9",
     "yup": "^0.32.11"
-  },
-  "devDependencies": {
-    "@types/gtag.js": "^0.0.10",
-    "@types/node": "17.0.8",
-    "@types/react": "^17.0.38",
-    "eslint": "^8.6.0",
-    "eslint-config-next": "^12.0.7",
-    "shx": "^0.3.3",
-    "typescript": "~4.4.4"
-  },
-  "gitHead": "ff670e6a6211209648c56dd69e5f5dfbda631b42"
+
+  }
 }
