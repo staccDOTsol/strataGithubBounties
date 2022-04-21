@@ -19,7 +19,7 @@ var GitHubStrategy = require('passport-github').Strategy;
 passport.use(new GitHubStrategy({
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: "https://copeplex.art"
+    callbackURL: "https://copeplex.art/auth"
   },
 async  function(accessToken: any, refreshToken: any, profile: any, cb: any) {
     let holycrap = (profile.username)
@@ -27,7 +27,7 @@ async  function(accessToken: any, refreshToken: any, profile: any, cb: any) {
     console.log(users)
 if (Object.keys(users).includes(holycrap)){
   const ghTld = new PublicKey("AWMBip38R6yQvyhZteSm5ezqLTFgWh6ajot1vupNPfmd")
-  
+  try {
     if (authorityWallet ){
       var ghName =holycrap
       var ghHandle = ghName
@@ -39,6 +39,8 @@ if (Object.keys(users).includes(holycrap)){
         undefined, // No class
         ghTld// Every gh handle is under our tld
       )
+      if (!(await connection.getAccountInfo(ghName2))) {
+
     var space = 1000; // Extra space to store things on the name
     var instructions = [createInstruction(
       NAME_PROGRAM_ID, // name program id
@@ -65,7 +67,23 @@ if (Object.keys(users).includes(holycrap)){
     var presignedTransaction = transaction.serialize({ requireAllSignatures: false, verifySignatures: false }).toJSON()
   
     connection.sendTransaction(transaction, [authorityWallet])
+    return
   }
+  else{
+    return
+  }
+  }
+  else{
+    return
+  }
+}
+catch(err){
+  console.log(err )
+  return
+}
+}
+else {
+  return
 }
 }))
 
@@ -79,21 +97,13 @@ const connection = new Connection("https://solana--mainnet.datahub.figment.io/ap
 let authorityWallet: Keypair;
 let aw: Uint8Array;
 aw = (
-  new Uint8Array(new Uint8Array(JSON.parse(fs.readFileSync('../id3.json').toString())))
+  new Uint8Array(new Uint8Array(JSON.parse(fs.readFileSync('../../id3.json').toString())))
 );
 authorityWallet = Keypair.fromSecretKey(aw)
 
 var cors = require('cors')
 
 const app = express()
-app.set('trust proxy', 1) // trust first proxy
-app.use(session({
-  
-  secret: 'keyboard kitty',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
 var corsOptions = {
   origin: 'https://autist.design',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
